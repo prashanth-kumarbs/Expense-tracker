@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main-container">
+    <header>
+      <h1>💰 Expense Tracker</h1>
+      <p>Track and manage your daily expenses easily</p>
+    </header>
+
+    <section class="form-section">
+      <form id="expense-form">
+        <input type="text" id="title" placeholder="Expense Title" required />
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="Grocery">Grocery</option>
+          <option value="Travel">Travel</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="number" id="amount" placeholder="Amount (₹)" required />
+        <input type="date" id="date" required />
+        <button type="submit" class="btn-primary">Add Expense</button>
+      </form>
+    </section>
+
+    <section class="table-section">
+      <h2>Expense List</h2>
+      <table id="expense-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Amount (₹)</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="expense-body"></tbody>
+      </table>
+    </section>
+
+    <section class="summary-section">
+      <h2>Summary</h2>
+      <div id="summary" class="summary"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
