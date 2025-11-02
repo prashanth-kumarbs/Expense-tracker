@@ -5,9 +5,11 @@ metadata:
 spec:
   selector:
     app: expense-app
-  type: LoadBalancer
+  type: Nodeport
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
+    nodeport:30080
+
 
