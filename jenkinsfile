@@ -6,7 +6,7 @@ pipeline {
         // Step 1: Clone code from GitHub
         stage('Clone Code from GitHub') {
             steps {
-                echo '📥 Cloning code from GitHub...'
+                echo ' Cloning code from GitHub...'
                 git branch: 'main', url: 'https://github.com/prashanth-kumarbs/Expense-tracker.git'
             }
         }
@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo '🐳 Building Docker image...'
+                    echo ' Building Docker image...'
                     sh 'docker build -t prashanthkumarbs/ownproject:v1 .'
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Login to Docker Hub & Push Image') {
             steps {
                 script {
-                    echo '📤 Logging in to Docker Hub and pushing image...'
+                    echo ' Logging in to Docker Hub and pushing image...'
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                         sh 'docker push prashanthkumarbs/ownproject:v1'
@@ -38,13 +38,13 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    echo '🚀 Deploying application to Kubernetes...'
+                    echo ' Deploying application to Kubernetes...'
                     withKubeConfig([credentialsId: 'kubeconfig-credentials-id']) {
                         sh '''
                         echo "Applying Kubernetes Deployment and Service..."
                         kubectl apply -f deployment.yaml
                         kubectl apply -f service.yaml
-                        echo "✅ Deployment applied successfully!"
+                        echo " Deployment applied successfully!"
                         '''
                     }
                 }
@@ -54,10 +54,10 @@ pipeline {
 
     post {
         success {
-            echo '🎉 Pipeline executed successfully! Application deployed to Kubernetes.'
+            echo ' Pipeline executed successfully! Application deployed to Kubernetes.'
         }
         failure {
-            echo '❌ Pipeline failed. Please check the logs for errors.'
+            echo ' Pipeline failed. Please check the logs for errors.'
         }
     }
 }
